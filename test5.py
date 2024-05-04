@@ -25,7 +25,7 @@ def animate_gif(label, start):
     gif = Image.open(gif_path)
     frames = [ImageTk.PhotoImage(image=img) for img in ImageSequence.Iterator(gif)]
     frame_count = len(frames)
-    counter = [0]  # Use mutable type for closure to retain changes
+    counter = [0] 
 
     def update_frame():
         if start:
@@ -34,12 +34,12 @@ def animate_gif(label, start):
             counter[0] += 1
             label.after(100, update_frame)
         else:
-            label.config(image='')  # Clear the image
+            label.config(image='')  
 
     if start:
         update_frame()
     else:
-        label.after_cancel(update_frame)  # Stop the animation
+        label.after_cancel(update_frame)  
 
 def select_folder():
     folder_selected = filedialog.askdirectory()
@@ -107,17 +107,11 @@ def process_images(folder_path):
 
 
 def save_results():
-    # Ask user for the file path where they want to save the image
     file_path = filedialog.asksaveasfilename(defaultextension=".png", filetypes=[("PNG files", "*.png")])
     if file_path:
-        # Generate a postscript file from the canvas content
         ps = display_canvas.postscript(colormode='color')
-
-        # Use PIL to convert the postscript file to a PNG
         img = Image.open(io.BytesIO(ps.encode('utf-8')))
         img.save(file_path)
-
-        # Inform the user that the file has been saved
         messagebox.showinfo("Save", "File successfully saved!")
 
 
@@ -152,7 +146,7 @@ def display_images_with_clusters(image_files, tsne_results, cluster_labels, desc
 
     photo = ImageTk.PhotoImage(pil_image)
     display_canvas.create_image(0, 0, image=photo, anchor=tk.NW)
-    display_canvas.image = photo  # Keep a reference to avoid
+    display_canvas.image = photo  
 
 app = tk.Tk()
 app.title("Image Clustering")
