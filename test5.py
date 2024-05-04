@@ -62,7 +62,7 @@ def generate_description(image, preprocess, model):
         generated = model.generate(im, generation_type="top_p")
     return open_clip.decode(generated[0]).split("<end_of_text>")[0].replace("<start_of_text>", "")
 
-#it makes descriptions for each photo but it should not
+
 def process_images(folder_path):
     image_files = glob.glob(os.path.join(folder_path, "*.png")) + \
                   glob.glob(os.path.join(folder_path, "*.jpeg")) + \
